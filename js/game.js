@@ -1,4 +1,4 @@
-var crd = [];
+
 
 var BootScene = new Phaser.Class({
     Extends: Phaser.Scene,
@@ -44,7 +44,12 @@ var WorldScene = new Phaser.Class({
           x += this.crd[i].width * 0.9 + 5;          
        }*/
 
-        //placeholders
+       /*this.loadSuit({suit: 'clubs', x:100, y:150, target:this.crd});
+       this.loadSuit({suit: 'spades', x:100, y:150, target:this.crd});
+       this.loadSuit({suit: 'diamond', x:100, y:150, target:this.crd});
+       this.loadSuit({suit: 'hearts', x:100, y:150, target:this.crd});*/
+
+       //placeholders
         this.crd.push(this.add.sprite(100, 150, 'cards', 'placeholder'));
         this.crd.push(this.add.sprite(260, 150, 'cards', 'placeholder'));
         this.crd.push(this.add.sprite(580, 150, 'cards', 'placeholder'));
@@ -60,22 +65,54 @@ var WorldScene = new Phaser.Class({
         this.crd.push(this.add.sprite(900, 378, 'cards', 'placeholder'));
         this.crd.push(this.add.sprite(1060, 378, 'cards', 'placeholder'));
 
- 
+        /*this.crd.push(this.add.sprite(100, 150, 'cards', 'card_shirt'));
+        //this.crd[this.crd.length-1].scale = 0.9;
+        this.crd[this.crd.length-1].setInteractive();*/
 
-        //для инфо 7 карт
-        /*this.crd.push(this.add.sprite(260, 410, 'cards', 'card_shirt'));
+       // this.ShuffleDeck();
+ 
+        var frames = this.textures.get('cards').getFrameNames();
+
+        var x = 100;
+        var y = 150;
+    
+        for (var i = 0; i <54 ; i++)
+        {
+            var image = this.add.image(x, y, 'cards', Phaser.Math.RND.pick(frames)).setInteractive();
+    
+            this.input.setDraggable(image);
+    
+            //x += 4;
+           // y += 4;
+        }
+    
+        this.input.on('dragstart', function (pointer, gameObject) {
+    
+            this.children.bringToTop(gameObject);
+    
+        }, this);
+    
+        this.input.on('drag', function (pointer, gameObject, dragX, dragY) {
+    
+            gameObject.x = dragX;
+            gameObject.y = dragY;
+    
+        });
+    
+       /* //для инфо 7 карт
+        this.crd.push(this.add.sprite(260, 410, 'cards', 'card_shirt'));
         this.crd.push(this.add.sprite(260, 442, 'cards', 'card_shirt'));
         this.crd.push(this.add.sprite(260, 474, 'cards', 'card_shirt'));
         this.crd.push(this.add.sprite(260, 506, 'cards', 'card_shirt'));
         this.crd.push(this.add.sprite(260, 538, 'cards', 'card_shirt'));
         this.crd.push(this.add.sprite(260, 570, 'cards', 'card_shirt'));
-        this.crd.push(this.add.sprite(260, 602, 'cards', 'card_shirt'));*/
+        this.crd.push(this.add.sprite(260, 602, 'cards', 'card_shirt')); */
 
         
 
 
        // sekcyja raskladki kart
-        this.crd.push(this.add.sprite(100, 150, 'cards', 'card_shirt'));
+       /* this.crd.push(this.add.sprite(100, 150, 'cards', 'card_shirt'));
         var j = 1;//dobavlyaet kartu na novom placeholdere      
         var x = 100;//nachalnaya koordinata po x
 
@@ -89,7 +126,7 @@ var WorldScene = new Phaser.Class({
             } while (k < j);
             x = x + 160;//sdvig po x
             j = j + 1;
-        }
+        }*/
 
 
         this.input.on('pointerdown', this.startDrag, this);
@@ -105,27 +142,48 @@ var WorldScene = new Phaser.Class({
             this.crd[i].setDepth(0);
         }
 
+      /*  if(this.dragObj instanceof Phaser.GameObjects.Sprite){
         this.dragObj.setDepth(1);
+        }
 
         this.input.on('pointermove', this.doDrag, this);
-        this.input.on('pointerup', this.stopDrag, this);
+        this.input.on('pointerup', this.stopDrag, this);*/
     },
 
     doDrag(pointer) {
+        if(this.dragObj instanceof Phaser.GameObjects.Sprite){
         this.dragObj.x = pointer.x;
         this.dragObj.y = pointer.y;
+        }
     },
 
     stopDrag() {
         this.input.on('pointerdown', this.startDrag, this);
         this.input.off('pointermove', this.doDrag, this);
         this.input.off('pointerup', this.stopDrag, this);
-
-        for (var i = 0; i < this.crd.length; i++) {
-            console.log(this.crd[i].depth);
-        }
-
     }
+
+    /*loadSuit(data){
+        let{suit,target,x,y} = data;
+
+        for(let i=1;i<=13;i++){
+          target.push(this.add.sprite(x,y,'cards', suit + '_' + i));
+          target[target.length-1].scale = 0.9;
+          target[target.length-1].scale = setInteractive();
+      }
+
+    },*/
+
+    /*ShuffleDeck(){
+        var n = this.crd.length-2;
+        for(let i = 0;i<n;i++ )
+            var ind1 = getRandomInt(n);
+            var ind2 = getRandomInt(n);
+            var obj = this.crd[ind1];
+            this.crd[ind1] = this.crd[ind2];
+            this.crd[ind2] = obj;
+
+    }*/
 });
 
 var config = {
