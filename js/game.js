@@ -16,6 +16,7 @@ var BootScene = new Phaser.Class({
     create: function () {
         this.scene.start('WorldScene');
     }
+  
 });
 
 var WorldScene = new Phaser.Class({
@@ -59,6 +60,8 @@ var WorldScene = new Phaser.Class({
         this.crd.push(this.add.sprite(900, 378, 'cards', 'placeholder'));
         this.crd.push(this.add.sprite(1060, 378, 'cards', 'placeholder'));
 
+ 
+
         //для инфо 7 карт
         /*this.crd.push(this.add.sprite(260, 410, 'cards', 'card_shirt'));
         this.crd.push(this.add.sprite(260, 442, 'cards', 'card_shirt'));
@@ -70,7 +73,8 @@ var WorldScene = new Phaser.Class({
 
         
 
-        //sekcyja raskladki kart
+
+       // sekcyja raskladki kart
         this.crd.push(this.add.sprite(100, 150, 'cards', 'card_shirt'));
         var j = 1;//dobavlyaet kartu na novom placeholdere      
         var x = 100;//nachalnaya koordinata po x
