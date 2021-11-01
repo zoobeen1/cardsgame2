@@ -1,6 +1,6 @@
-var crd = [];
-var placehold = [];
-var shirt = [];
+//var crd = [];
+//var placehold = [];
+//var shirt = [];
 
 function getRandomInt(max){
     return Math.floor(Math.random()*max);
@@ -43,6 +43,7 @@ var WorldScene = new Phaser.Class({
     create: function () {
         // здесь мы создадим сцену мира
         this.crd = [];
+        this.deck = [];
         this.shirt = [];
         this.placehold = [];
 
@@ -54,7 +55,6 @@ var WorldScene = new Phaser.Class({
           this.crd[i].setInteractive();
           x += this.crd[i].width * 0.9 + 5;          
        }*/
-
 
         //placeholders
         this.placehold.push(this.add.sprite(100, 150, 'placeholder', 'placeholder'));
@@ -73,18 +73,22 @@ var WorldScene = new Phaser.Class({
         this.placehold.push(this.add.sprite(1060, 378, 'placeholder', 'placeholder'));
 
         
-        //
+        //predvaritelnoe napolnenie massiva kart
         this.loadSuit({ suit: 'clubs', x: 100, y: 150, target: this.crd });
         this.loadSuit({ suit: 'spades', x: 100, y: 150, target: this.crd });
         this.loadSuit({ suit: 'diamond', x: 100, y: 150, target: this.crd });
         this.loadSuit({ suit: 'hearts', x: 100, y: 150, target: this.crd });
-
+        
+        //vykladka rubashki
         this.shirt.push(this.add.sprite(100, 150, 'card_shirt', 'card_shirt'));
         this.shirt[0].setDepth(52);
 
         this.ShuffleDeck();
 
-       //this.crd[51].setDepth(70);
+        this.crd[51].setDepth(70);
+        this.block = this.crd[51];
+        //TODO this.crd[51].setInteractive;
+        this.block
 
         //this.crd[this.crd.length-1].scale = 0.9;
         //this.crd[this.crd.length-1].setInteractive();
@@ -155,6 +159,7 @@ var WorldScene = new Phaser.Class({
    
     },
 
+
     startDrag(pointer, targets) {
         this.input.off('pointerdown', this.startDrag, this);
         this.dragObj = targets[0];
@@ -207,7 +212,7 @@ var WorldScene = new Phaser.Class({
         //for (let i = 0; i < n; i++) {
         //    this.crd[i].depth = i;
         //}
-       /* for (let i = 0; i < n; i++) {
+        /*for (let i = 0; i < n; i++) {
             var ind1 = getRandomInt(n);
             var ind2 = getRandomInt(n);
             var obj = this.crd[ind1];
@@ -219,10 +224,12 @@ var WorldScene = new Phaser.Class({
         }
         
         for (let i = 0; i < n; i++) {
-            console.log(" " + i + ", depth = " + this.crd[i].depth);
+            console.log(" " + i + ", depth = " + this.crd[i]);
         }
         console.log("here");
-    }
+    },
+
+
 
 });
 
@@ -245,7 +252,5 @@ var config = {
         WorldScene
     ]
 };
-
-
 
 var game = new Phaser.Game(config);
