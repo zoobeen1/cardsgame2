@@ -63,6 +63,22 @@ var WorldScene = new Phaser.Class({
     this.game_crd = []; //massiv objektov-spraitov kart nahodiashihsia v igre
     this.shirt = []; //rubashka
     this.placehold = []; //placeholdery (cells)
+    //sem osnovnyh mest
+    this.deck1 = [];
+    this.deck2 = [];
+    this.deck3 = [];
+    this.deck4 = [];
+    this.deck5 = [];
+    this.deck6 = [];
+    this.deck7 = [];
+    //card names
+    this.name1 = [];
+    this.name2 = [];
+    this.name3 = [];
+    this.name4 = [];
+    this.name5 = [];
+    this.name6 = [];
+    this.name7 = [];
 
     var x = 100;
     var y = 150;
@@ -126,7 +142,7 @@ var WorldScene = new Phaser.Class({
     this.shirt.push(this.add.sprite(100, 150, "card_shirt", "card_shirt"));
     this.shirt[0].setDepth(52);
 
-    //predvaritelnoe napolnenie massiva kart
+    //predvaritelnoe napolnenie massiva nazvanij kart
     for (var i = 1; i <= 13; i++) {
       this.crd.push("clubs_" + i);
       this.crd.push("diamond_" + i);
@@ -141,16 +157,100 @@ var WorldScene = new Phaser.Class({
 
     //peremeshivanie
     this.crd = shuffle(this.crd);
-    //this.ShuffleDeck();
 
     // vykladka po kolonkam
     let k = 0;
     for (let j = 0; j < 7; j++) {
       //perehod po placeholderam
+      let u = 0;
       for (let i = 0; i < j + 1; i++) {
         //vykladka kart po placeholderam
-        this.deck[k] = this.crd[this.crd.length - 1]; //zapominaem nazvanie kart vyhodiashih iz kolody v igru
         //console.log("crd = " + this.crd[this.crd.length-1]);
+        if (j == 0) {
+          this.name1[u] = this.crd[this.crd.length - 1]; //zapominaem nazvanie kart vyhodiashih iz kolody v igru
+          this.deck1[u] = this.add.sprite(xx, yy, "cards", this.crd.pop()); //! .pop() zabiraet kartu iz kolody
+          this.deck1[u].setInteractive();
+        }
+        if (j == 1) {
+          this.name2[u] = this.crd[this.crd.length - 1]; //zapominaem nazvanie kart vyhodiashih iz kolody v igru
+          this.deck2[u] = this.add.sprite(xx, yy, "cards", this.crd.pop()); //! .pop() zabiraet kartu iz kolody
+          if (i == j) this.deck2[u].setInteractive();
+          else
+            this.shirt[k + 1] = this.add.sprite(
+              xx,
+              yy,
+              "card_shirt",
+              "card_shirt"
+            ); //vykladka rubashek
+          u++;
+        }
+        if (j == 2) {
+          this.name3[u] = this.crd[this.crd.length - 1]; //zapominaem nazvanie kart vyhodiashih iz kolody v igru
+          this.deck3[u] = this.add.sprite(xx, yy, "cards", this.crd.pop()); //! .pop() zabiraet kartu iz kolody
+          if (i == j) this.deck3[u].setInteractive();
+          else
+            this.shirt[k + 1] = this.add.sprite(
+              xx,
+              yy,
+              "card_shirt",
+              "card_shirt"
+            ); //vykladka rubashek
+          u++;
+        }
+        if (j == 3) {
+          this.name4[u] = this.crd[this.crd.length - 1]; //zapominaem nazvanie kart vyhodiashih iz kolody v igru
+          this.deck4[u] = this.add.sprite(xx, yy, "cards", this.crd.pop()); //! .pop() zabiraet kartu iz kolody
+          if (i == j) this.deck4[u].setInteractive();
+          else
+            this.shirt[k + 1] = this.add.sprite(
+              xx,
+              yy,
+              "card_shirt",
+              "card_shirt"
+            ); //vykladka rubashek
+          u++;
+        }
+        if (j == 4) {
+          this.name5[u] = this.crd[this.crd.length - 1]; //zapominaem nazvanie kart vyhodiashih iz kolody v igru
+          this.deck5[u] = this.add.sprite(xx, yy, "cards", this.crd.pop()); //! .pop() zabiraet kartu iz kolody
+          if (i == j) this.deck5[u].setInteractive();
+          else
+            this.shirt[k + 1] = this.add.sprite(
+              xx,
+              yy,
+              "card_shirt",
+              "card_shirt"
+            ); //vykladka rubashek
+          u++;
+        }
+        if (j == 5) {
+          this.name6[u] = this.crd[this.crd.length - 1]; //zapominaem nazvanie kart vyhodiashih iz kolody v igru
+          this.deck6[u] = this.add.sprite(xx, yy, "cards", this.crd.pop()); //! .pop() zabiraet kartu iz kolody
+          if (i == j) this.deck6[u].setInteractive();
+          else
+            this.shirt[k + 1] = this.add.sprite(
+              xx,
+              yy,
+              "card_shirt",
+              "card_shirt"
+            ); //vykladka rubashek
+          u++;
+        }
+        if (j == 6) {
+          this.name7[u] = this.crd[this.crd.length - 1]; //zapominaem nazvanie kart vyhodiashih iz kolody v igru
+          this.deck7[u] = this.add.sprite(xx, yy, "cards", this.crd.pop()); //! .pop() zabiraet kartu iz kolody
+          if (i == j) this.deck7[u].setInteractive();
+          else
+            this.shirt[k + 1] = this.add.sprite(
+              xx,
+              yy,
+              "card_shirt",
+              "card_shirt"
+            ); //vykladka rubashek
+          u++;
+        }
+
+        /*
         this.game_crd[k] = this.add.sprite(xx, yy, "cards", this.crd.pop()); //! .pop() zabiraet kartu iz kolody
 
         if (i == j) this.game_crd[k].setInteractive();
@@ -161,7 +261,7 @@ var WorldScene = new Phaser.Class({
             yy,
             "card_shirt",
             "card_shirt"
-          ); //vykladka rubashek
+          ); //vykladka rubashek*/
 
         yy += 30; //smeshchenie po y
         //console.log("deck = " + this.deck[k]);
@@ -170,36 +270,6 @@ var WorldScene = new Phaser.Class({
       xx += this.width_card + 18; //peremeschenie na sledujuschij placeholder
       yy = 378; //vozvrat pozicii y na placeholder
     }
-
-    //this.crd[this.crd.length-1].scale = 0.9;
-    //this.crd[this.crd.length-1].setInteractive();
-
-    /*var frames = this.textures.get('cards').getFrameNames();
-    
-            var x = 100;
-            var y = 150;
-        
-            for (var i = 0; i <54 ; i++)
-            {
-                var image = this.add.image(x, y, 'cards', Phaser.Math.RND.pick(frames)).setInteractive();
-        
-                this.input.setDraggable(image);
-        
-                //x += 4;
-               // y += 4;
-            }
-            this.input.on('dragstart', function (pointer, gameObject) {
-        
-                this.children.bringToTop(gameObject);
-        
-            }, this);
-        
-            this.input.on('drag', function (pointer, gameObject, dragX, dragY) {
-        
-                gameObject.x = dragX;
-                gameObject.y = dragY;
-        
-            });*/
 
     //для инфо 7 карт
     /*this.crd.push(this.add.sprite(260, 410, 'cards', 'card_shirt'));
@@ -210,47 +280,8 @@ var WorldScene = new Phaser.Class({
             this.crd.push(this.add.sprite(260, 570, 'cards', 'card_shirt'));
             this.crd.push(this.add.sprite(260, 602, 'cards', 'card_shirt'));*/
 
-    // sekcyja raskladki kart
-    /* this.crd.push(this.add.sprite(100, 150, 'cards', 'card_shirt'));
-             var j = 1;//dobavlyaet kartu na novom placeholdere      
-             var x = 100;//nachalnaya koordinata po x
-     
-             for (let i = 0; i < 7; i++) {
-                 var y = 378;//nachalnaya koordinata po y
-                 var k = 0;//schetchik kart v placeholdere
-                 do {
-                     this.crd.push(this.add.sprite(x, y, 'cards', 'card_shirt'));
-                     y = y + 32;//sdvig v niz
-                     k++;
-                 } while (k < j);
-                 x = x + 160;//sdvig po x
-                 j = j + 1;
-             }*/
-
     this.input.on("pointerdown", this.startDrag, this);
   },
-
-  /*startDrag(pointer, targets) {
-    this.input.off("pointerdown", this.startDrag, this);
-    this.dragObj = targets[0];
-
-    //this.scene.bringToTop(this.dragObj);
-    //game.scene.bringToTop(this.dragObj);
-
-    if (this.dragObj instanceof Phaser.GameObjects.Sprite) {
-      this.xstart = this.dragObj.x;
-      this.ystart = this.dragObj.y;
-      for (var i = 0; i < this.game_crd.length; i++) {
-        this.game_crd[i].setDepth(0);
-        //console.log("  depth2 = " + this.game_crd[i].depth);
-      }
-      this.dragObj.setDepth(53);
-    }
-
-    this.input.on("pointermove", this.doDrag, this);
-    this.input.on("pointerup", this.stopDrag, this);
-    //this.dragObj.
-  },*/
 
   startDrag(pointer, targets) {
     this.dragObj = targets[0];
@@ -263,11 +294,7 @@ var WorldScene = new Phaser.Class({
       this.xstart = this.dragObj.x;
       this.ystart = this.dragObj.y;
 
-      for (var i = 0; i < this.game_crd.length; i++) {
-        this.game_crd[i].setDepth(0);
-        //console.log("  depth2 = " + this.game_crd[i].depth);
-      }
-      this.dragObj.setDepth(53);
+      this.dragObj.setDepth(54);
 
       this.input.on("pointermove", this.doDrag, this);
       this.input.on("pointerup", this.stopDrag, this);
@@ -285,182 +312,135 @@ var WorldScene = new Phaser.Class({
     this.input.on("pointerdown", this.startDrag, this);
     this.input.off("pointermove", this.doDrag, this);
     this.input.off("pointerup", this.stopDrag, this);
+    this.dragObj.setDepth(53);
 
     if (pointer.y < 378) {
       this.dragObj.x = this.xstart;
       this.dragObj.y = this.ystart;
-    }
-    //----------------------------
-    /* if (pointer.x < this.xstart - 80) {
-      this.dragObj.x = this.xstart - 160;
-      this.dragObj.y = 378;
     } else {
-      this.dragObj.x = this.xstart;
-      this.dragObj.y = this.ystart;
-    }*/
-    //-----------------------------
-    switch (true) {
-      //vlevo
-      case pointer.x < this.xstart - 880:
-        if (pointer.x < 180) {
-          this.dragObj.x = 100;
+      switch (true) {
+        //vlevo
+        case pointer.x < this.xstart - 880:
+          if (pointer.x < 180) {
+            this.dragObj.x = 100;
+            this.dragObj.y = 378;
+            break;
+          }
+          this.dragObj.x = this.xstart - 960;
           this.dragObj.y = 378;
           break;
-        }
-        this.dragObj.x = this.xstart - 960;
-        this.dragObj.y = 378;
-        break;
-      case pointer.x < this.xstart - 720:
-        if (pointer.x < 180) {
-          this.dragObj.x = 100;
+        case pointer.x < this.xstart - 720:
+          if (pointer.x < 180) {
+            this.dragObj.x = 100;
+            this.dragObj.y = 378;
+            break;
+          }
+          this.dragObj.x = this.xstart - 800;
           this.dragObj.y = 378;
           break;
-        }
-        this.dragObj.x = this.xstart - 800;
-        this.dragObj.y = 378;
-        break;
-      case pointer.x < this.xstart - 560:
-        if (pointer.x < 180) {
-          this.dragObj.x = 100;
+        case pointer.x < this.xstart - 560:
+          if (pointer.x < 180) {
+            this.dragObj.x = 100;
+            this.dragObj.y = 378;
+            break;
+          }
+          this.dragObj.x = this.xstart - 640;
           this.dragObj.y = 378;
           break;
-        }
-        this.dragObj.x = this.xstart - 640;
-        this.dragObj.y = 378;
-        break;
-      case pointer.x < this.xstart - 400:
-        if (pointer.x < 180) {
-          this.dragObj.x = 100;
+        case pointer.x < this.xstart - 400:
+          if (pointer.x < 180) {
+            this.dragObj.x = 100;
+            this.dragObj.y = 378;
+            break;
+          }
+          this.dragObj.x = this.xstart - 480;
           this.dragObj.y = 378;
           break;
-        }
-        this.dragObj.x = this.xstart - 480;
-        this.dragObj.y = 378;
-        break;
-      case pointer.x < this.xstart - 240:
-        if (pointer.x < 180) {
-          this.dragObj.x = 100;
+        case pointer.x < this.xstart - 240:
+          if (pointer.x < 180) {
+            this.dragObj.x = 100;
+            this.dragObj.y = 378;
+            break;
+          }
+          this.dragObj.x = this.xstart - 320;
           this.dragObj.y = 378;
           break;
-        }
-        this.dragObj.x = this.xstart - 320;
-        this.dragObj.y = 378;
-        break;
-      case pointer.x < this.xstart - 80:
-        if (pointer.x < 180) {
-          this.dragObj.x = 100;
+        case pointer.x < this.xstart - 80:
+          if (pointer.x < 180) {
+            this.dragObj.x = 100;
+            this.dragObj.y = 378;
+            break;
+          }
+          this.dragObj.x = this.xstart - 160;
           this.dragObj.y = 378;
           break;
-        }
-        this.dragObj.x = this.xstart - 160;
-        this.dragObj.y = 378;
-        break;
 
-      //vpravo
-      case pointer.x > this.xstart + 880:
-        if (pointer.x > 980) {
-          this.dragObj.x = 1060;
+        //vpravo
+        case pointer.x > this.xstart + 880:
+          if (pointer.x > 980) {
+            this.dragObj.x = 1060;
+            this.dragObj.y = 378;
+            break;
+          }
+          this.dragObj.x = this.xstart + 960;
           this.dragObj.y = 378;
           break;
-        }
-        this.dragObj.x = this.xstart + 960;
-        this.dragObj.y = 378;
-        break;
 
-      case pointer.x > this.xstart + 720:
-        if (pointer.x > 980) {
-          this.dragObj.x = 1060;
+        case pointer.x > this.xstart + 720:
+          if (pointer.x > 980) {
+            this.dragObj.x = 1060;
+            this.dragObj.y = 378;
+            break;
+          }
+          this.dragObj.x = this.xstart + 800;
           this.dragObj.y = 378;
           break;
-        }
-        this.dragObj.x = this.xstart + 800;
-        this.dragObj.y = 378;
-        break;
 
-      case pointer.x > this.xstart + 560:
-        if (pointer.x > 980) {
-          this.dragObj.x = 1060;
+        case pointer.x > this.xstart + 560:
+          if (pointer.x > 980) {
+            this.dragObj.x = 1060;
+            this.dragObj.y = 378;
+            break;
+          }
+          this.dragObj.x = this.xstart + 640;
           this.dragObj.y = 378;
           break;
-        }
-        this.dragObj.x = this.xstart + 640;
-        this.dragObj.y = 378;
-        break;
 
-      case pointer.x > this.xstart + 400:
-        if (pointer.x > 980) {
-          this.dragObj.x = 1060;
+        case pointer.x > this.xstart + 400:
+          if (pointer.x > 980) {
+            this.dragObj.x = 1060;
+            this.dragObj.y = 378;
+            break;
+          }
+          this.dragObj.x = this.xstart + 480;
           this.dragObj.y = 378;
           break;
-        }
-        this.dragObj.x = this.xstart + 480;
-        this.dragObj.y = 378;
-        break;
 
-      case pointer.x > this.xstart + 240:
-        if (pointer.x > 980) {
-          this.dragObj.x = 1060;
+        case pointer.x > this.xstart + 240:
+          if (pointer.x > 980) {
+            this.dragObj.x = 1060;
+            this.dragObj.y = 378;
+            break;
+          }
+          this.dragObj.x = this.xstart + 320;
           this.dragObj.y = 378;
           break;
-        }
-        this.dragObj.x = this.xstart + 320;
-        this.dragObj.y = 378;
-        break;
 
-      case pointer.x > this.xstart + 80:
-        if (pointer.x > 980) {
-          this.dragObj.x = 1060;
+        case pointer.x > this.xstart + 80:
+          if (pointer.x > 980) {
+            this.dragObj.x = 1060;
+            this.dragObj.y = 378;
+            break;
+          }
+          this.dragObj.x = this.xstart + 160;
           this.dragObj.y = 378;
           break;
-        }
-        this.dragObj.x = this.xstart + 160;
-        this.dragObj.y = 378;
-        break;
 
-      default:
-        this.dragObj.x = this.xstart;
-        this.dragObj.y = this.ystart;
+        default:
+          this.dragObj.x = this.xstart;
+          this.dragObj.y = this.ystart;
+      }
     }
-
-    console.log("x position - " + this.dragObj.x);
-    console.log("y position - " + this.dragObj.y);
-    let a = this.dragObj.x;
-    let b = this.dragObj.width / 2;
-    let c = a + b;
-    console.log("width - " + c);
-  },
-
-  //metod zagruzki kolody
-  loadSuit(data) {
-    let { suit, target, x, y } = data;
-
-    for (let i = 1; i <= 13; i++) {
-      target.push(this.add.sprite(x, y, "cards", suit + "_" + i));
-      //target[target.length-1].scale = 0.9;
-      target[target.length - 1].setInteractive();
-    }
-  },
-
-  ShuffleDeck() {
-    var n = this.crd.length - 2;
-    //for (let i = 0; i < n; i++) {
-    //    this.crd[i].depth = i;
-    //}
-    /*for (let i = 0; i < n; i++) {
-                var ind1 = getRandomInt(n);
-                var ind2 = getRandomInt(n);
-                var obj = this.crd[ind1];
-                this.crd[ind1] = this.crd[ind2];
-                this.crd[ind2] = obj;
-            }*/
-    for (let i = 0; i < n; i++) {
-      this.crd[i].depth = getRandomInt(n);
-    }
-
-    for (let i = 0; i < n; i++) {
-      console.log(" " + i + ", depth = " + this.crd[i]);
-    }
-    console.log("here");
   },
 });
 
