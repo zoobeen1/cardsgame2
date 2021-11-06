@@ -16,6 +16,12 @@ function shuffle(arr) {
   }
   return arr;
 }
+function red(cart) {
+  //proverka na mast
+  if (cart.includes("clubs") || cart.includes("spades")) return "black";
+
+  if (cart.includes("diamond") || cart.includes("hearts")) return "red";
+}
 
 var BootScene = new Phaser.Class({
   Extends: Phaser.Scene,
@@ -59,8 +65,8 @@ var WorldScene = new Phaser.Class({
   create: function () {
     // здесь мы создадим сцену мира
     this.crd = []; //massiv nazvanij kart
-    this.deck = []; //massiv dlya identifikacii - v game_crd lejat sprity, a tut nazvanija kart pereshedshih v igru
-    this.game_crd = []; //massiv objektov-spraitov kart nahodiashihsia v igre
+    this.deck = []; //
+    this.game_crd = []; //
     this.shirt = []; //rubashka
     this.placehold = []; //placeholdery (cells)
     //sem osnovnyh mest
@@ -285,6 +291,8 @@ var WorldScene = new Phaser.Class({
 
   startDrag(pointer, targets) {
     this.dragObj = targets[0];
+    this.name_card = "null";
+    //this.red = null; // false - black, true - red
     if (this.dragObj instanceof Phaser.GameObjects.Sprite) {
       this.input.off("pointerdown", this.startDrag, this);
 
@@ -295,6 +303,42 @@ var WorldScene = new Phaser.Class({
       this.ystart = this.dragObj.y;
 
       this.dragObj.setDepth(54);
+
+      if (this.xstart == 100) {
+        this.name_card = this.name1[this.name1.length - 1];
+      }
+      if (this.xstart == 260) {
+        this.name_card = this.name2[this.name2.length - 1];
+      }
+      if (this.xstart == 420) {
+        this.name_card = this.name3[this.name3.length - 1];
+      }
+      if (this.xstart == 580) {
+        this.name_card = this.name4[this.name4.length - 1];
+      }
+      if (this.xstart == 740) {
+        this.name_card = this.name5[this.name5.length - 1];
+      }
+      if (this.xstart == 900) {
+        this.name_card = this.name6[this.name6.length - 1];
+      }
+      if (this.xstart == 1060) {
+        this.name_card = this.name7[this.name7.length - 1];
+      }
+
+      //proverka na mast
+      /*if (this.name_card.includes("clubs") || this.name_card.includes("spades"))
+        this.red = false;
+
+      if (
+        this.name_card.includes("diamond") ||
+        this.name_card.includes("hearts")
+      )
+        this.red = true;*/
+      /*
+      console.log("Pos.X - " + this.xstart);
+      console.log("Name - " + this.name_card);
+      console.log("red - " + this.red);*/
 
       this.input.on("pointermove", this.doDrag, this);
       this.input.on("pointerup", this.stopDrag, this);
@@ -313,12 +357,46 @@ var WorldScene = new Phaser.Class({
     this.input.off("pointermove", this.doDrag, this);
     this.input.off("pointerup", this.stopDrag, this);
     this.dragObj.setDepth(53);
-
+    /*
+    100
+    260
+    420
+    580
+    740
+    900
+    1060
+    */
     if (pointer.y < 378) {
       this.dragObj.x = this.xstart;
       this.dragObj.y = this.ystart;
     } else {
-      switch (true) {
+      if (pointer.x < 180) {
+        if (red(this.name1[this.name1.length - 1]) != red(this.name_card)) {
+          /*this.deck1[this.name1.length] = this.add.sprite(
+            100,
+            378,
+            "cards",
+            this..pop()
+          ); //! .pop() zabiraet kartu iz kolody*/
+          this.dragObj.x = 100;
+          this.dragObj.y = 378;
+        } else {
+          this.dragObj.x = this.xstart;
+          this.dragObj.y = this.ystart;
+        }
+      }
+      if (pointer.x > 179 && pointer.x < 340) {
+        if (red(this.name2[this.name2.length - 1]) != red(this.name_card)) {
+          this.dragObj.x = 260;
+          this.dragObj.y = 378;
+        } else {
+          this.dragObj.x = this.xstart;
+          this.dragObj.y = this.ystart;
+        }
+      }
+    }
+
+    /*switch (true) {
         //vlevo
         case pointer.x < this.xstart - 880:
           if (pointer.x < 180) {
@@ -439,8 +517,7 @@ var WorldScene = new Phaser.Class({
         default:
           this.dragObj.x = this.xstart;
           this.dragObj.y = this.ystart;
-      }
-    }
+      }*/
   },
 });
 
